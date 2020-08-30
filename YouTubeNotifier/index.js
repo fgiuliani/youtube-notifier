@@ -2,14 +2,14 @@ module.exports = async function (context, myTimer) {
   const { google } = require("googleapis");
   const sendGridClient = require("@sendgrid/mail");
 
-  const youtube = google.youtube({
+  const youtubeClient = google.youtube({
     version: "v3",
     auth: process.env["YouTubeAPIKey"],
   });
 
   sendGridClient.setApiKey(process.env["SendGridAPIKey"]);
 
-  const response = await youtube.commentThreads.list({
+  const response = await youtubeClient.commentThreads.list({
     part: "snippet,replies",
     allThreadsRelatedToChannelId: process.env["YouTubeChannelID"],
     maxResults: 100,
